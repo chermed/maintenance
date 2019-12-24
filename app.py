@@ -32,4 +32,7 @@ template = """
 """
 @app.route('/')
 def hello():
-    return Template(template).render(**os.environ)
+    if os.environ.get('HTML'):
+        return os.environ.get('HTML')
+    else:
+        return Template(template).render(**os.environ)
