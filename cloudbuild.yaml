@@ -1,0 +1,6 @@
+steps:
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["compute", "scp", "--recurse", ".", "outside-comm-static-ip:/opt/"]
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["compute", "ssh", "--command", "sh", "/opt/deploy.sh"]
+ 
