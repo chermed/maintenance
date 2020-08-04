@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "client-connectors"
+version = "0.1.0"
+description = "Handle all client API connections and data pipelines"
+authors = ["Mohamed Cherkaoui <mohamed.cherkaoui@traxretail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+flask = "^1.1.2"
+
+[tool.poetry.dev-dependencies]
+autopep8 = "^1.5.4"
+pylint = "^2.5.3"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

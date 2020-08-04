@@ -1,0 +1,16 @@
+version: '3.5'
+services:
+  web:
+    image: web
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/usr/src/app'
+    ports:
+      - 5002:5000
+    environment:
+      - APP_NAME=client-connectors
+      - FLASK_DEBUG=1
+      - PYTHONUNBUFFERED=0
+    
