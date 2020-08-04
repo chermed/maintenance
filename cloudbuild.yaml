@@ -1,6 +1,6 @@
 steps:
 - name: "gcr.io/cloud-builders/gcloud"
-  args: ["compute", "scp", "--recurse", "app.py", "instance-maintenance-test:/tmp", "--zone", "us-central1-a"]
+  args: ["compute", "scp", "--recurse", "deploy.py", "instance-maintenance-test:/tmp", "--zone", "us-central1-a"]
 - name: "gcr.io/cloud-builders/gcloud"
-  args: ["compute", "ssh", "--command", "sh", "/opt/deploy.sh"]
+  args: ["compute", "ssh", "--command", "'sh /tmp/deploy.sh'"]
  
