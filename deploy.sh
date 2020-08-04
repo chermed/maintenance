@@ -2,7 +2,7 @@
 set -e
 
 #TODO test commands and improve messages
-
+echo "Deploy the file $1 to the environment $2"
 
 ### PREPARATION OF PYTHON ENVIRONMENT
 echo "install system packages: python3-virtualenv python3-pip"
