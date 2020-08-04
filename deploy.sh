@@ -15,7 +15,7 @@ echo "create python virtualenv if not exists"
 [ ! -d /opt/venv ] && /bin/su -s /bin/bash -c 'python3 -m venv /opt/venv' python-user
 
 ### PREPARATION OF PYTHON SERVICE
-if [ ! -z $(systemctl list-units --all -t service --full --no-legend "client-connectors.service" | cut -f1 -d' ') ]; then
+if [ ! -f /etc/systemd/system/client-connectors.service ]; then
     echo "the service client-connectors.service already exists"
 else
     echo "creating the service client-connectors.service"
