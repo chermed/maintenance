@@ -15,11 +15,11 @@ echo "create python virtualenv if not exists"
 [ ! -d /opt/venv ] && /bin/su -s /bin/bash -c 'python3 -m venv /opt/venv' python-user
 
 ### PREPARATION OF PYTHON SERVICE
-if [ -f /etc/systemd/system/client-connectors.service ]; then
-    echo "the service client-connectors.service already exists"
+if [ -f /etc/systemd/system/client-connectors-$2.service ]; then
+    echo "the service client-connectors-$2.service already exists"
 else
-    echo "creating the service client-connectors.service"
-    cat > /etc/systemd/system/client-connectors.service <<EOF 
+    echo "creating the service client-connectors-$2.service"
+    cat > /etc/systemd/system/client-connectors-$2.service <<EOF 
 [Unit]
 Description=Client connectors
  
@@ -36,8 +36,8 @@ TimeoutStopSec=300
 WantedBy=multi-user.target
 EOF
 
-    systemctl enable client-connectors.service
-    systemctl start client-connectors.service
+    systemctl enable client-connectors-$2.service
+    systemctl start client-connectors-$2.service
 
 fi
 
@@ -52,6 +52,6 @@ echo "change owner of /opt/app to python-user"
 chown -R python-user:python-user /opt/app
 echo "update requirements as python-user"
 [ -f /opt/app/requirements.txt ] && /bin/su -s /bin/bash -c '/opt/venv/bin/pip install -r /opt/app/requirements.txt' python-user
-echo "restart the application (service client-connectors)"
-systemctl restart client-connectors.service
+echo "restart the application (service client-connectors-$2)"
+systemctl restart client-connectors-$2.service
 echo "deployement complete without errors"
