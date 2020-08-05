@@ -12,6 +12,7 @@ APP_BRANCH=$2
 APP_ROOT=/opt/$APP_BRANCH
 APP_DIR=$APP_ROOT/app
 APP_VENV=$APP_ROOT/venv
+APP_PORT=$3
 
 ### PREPARATION OF PYTHON ENVIRONMENT
 echo "install system packages: python3-virtualenv python3-pip"
@@ -64,6 +65,6 @@ chown -R python-user:python-user $APP_DIR
 echo "update requirements as python-user"
 [ -f $APP_DIR/requirements.txt ] && /bin/su -s /bin/bash -c "/opt/$APP_BRANCH/venv/bin/pip install -r $APP_DIR/requirements.txt" python-user
 echo "restart the application (service client-connectors-$APP_BRANCH)"
-systemctl stop client-connectors-$APP_BRANCH.service || true
-systemctl start client-connectors-$APP_BRANCH.service
+systemctl restart client-connectors-$APP_BRANCH.service || true
+systemctl status client-connectors-$APP_BRANCH.service
 echo "deployement complete without errors"
