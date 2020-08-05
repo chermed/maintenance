@@ -3,9 +3,9 @@ steps:
   entrypoint: "tar"
   args: ["-czf", "$BRANCH_NAME-latest.tar.gz", "."]
 - name: "gcr.io/cloud-builders/gcloud"
-  args: ["compute", "scp", "--recurse", "$BRANCH_NAME-latest.tar.gz", "instance-maintenance-test:/tmp", "--zone", "us-central1-a"]
+  args: ["compute", "scp", "--recurse", "$BRANCH_NAME-latest.tar.gz", "$_INSTANCE_NAME:/tmp", "--zone", "$_INSTANCE_ZONE"]
 - name: "gcr.io/cloud-builders/gcloud"
-  args: ["compute", "scp", "deploy.sh", "instance-maintenance-test:/tmp/$BRANCH_NAME-deploy.sh", "--zone", "us-central1-a"]
+  args: ["compute", "scp", "deploy.sh", "$_INSTANCE_NAME:/tmp/$BRANCH_NAME-deploy.sh", "--zone", "$_INSTANCE_ZONE"]
 - name: "gcr.io/cloud-builders/gcloud"
-  args: ["compute", "ssh", "instance-maintenance-test", "--zone", "us-central1-a", "--command", "sudo sh /tmp/$BRANCH_NAME-deploy.sh /tmp/$BRANCH_NAME-latest.tar.gz $BRANCH_NAME"]
+  args: ["compute", "ssh", "$_INSTANCE_NAME", "--zone", "$_INSTANCE_ZONE", "--command", "sudo sh /tmp/$BRANCH_NAME-deploy.sh /tmp/$BRANCH_NAME-latest.tar.gz $BRANCH_NAME"]
  
