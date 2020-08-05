@@ -40,7 +40,7 @@ Type=simple
 User=python-user
 Group=python-user
 WorkingDirectory=/opt/$APP_BRANCH/app
-ExecStart=/opt/$APP_BRANCH/venv/bin/python manage.py run -h 0.0.0.0 -p $3
+ExecStart=/opt/$APP_BRANCH/venv/bin/gunicorn -b 0.0.0.0:$3 manage:app -w 4
 Restart=on-failure
 TimeoutStopSec=300
  
@@ -65,6 +65,8 @@ chown -R python-user:python-user $APP_DIR
 echo "update requirements as python-user"
 [ -f $APP_DIR/requirements.txt ] && /bin/su -s /bin/bash -c "/opt/$APP_BRANCH/venv/bin/pip install -r $APP_DIR/requirements.txt" python-user
 echo "restart the application (service client-connectors-$APP_BRANCH)"
-systemctl restart client-connectors-$APP_BRANCH.service || true
+systemctl stop client-connectors-$APP_BRANCH.service || true
+systemctl start client-connectors-$APP_BRANCH.service || true
+
 systemctl status client-connectors-$APP_BRANCH.service
 echo "deployement complete without errors"
