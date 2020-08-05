@@ -7,5 +7,5 @@ steps:
 - name: "gcr.io/cloud-builders/gcloud"
   args: ["compute", "scp", "deploy.sh", "$_INSTANCE_NAME:/tmp/$BRANCH_NAME-deploy.sh", "--zone", "$_INSTANCE_ZONE"]
 - name: "gcr.io/cloud-builders/gcloud"
-  args: ["compute", "ssh", "$_INSTANCE_NAME", "--zone", "$_INSTANCE_ZONE", "--command", "sudo sh /tmp/$BRANCH_NAME-deploy.sh /tmp/$BRANCH_NAME-latest.tar.gz $BRANCH_NAME 8081"]
+  args: ["compute", "ssh", "$_INSTANCE_NAME", "--zone", "$_INSTANCE_ZONE", "--command", "sudo sh /tmp/$BRANCH_NAME-deploy.sh /tmp/$BRANCH_NAME-latest.tar.gz $BRANCH_NAME $_INSTANCE_PORT"]
  
