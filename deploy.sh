@@ -4,7 +4,7 @@ set -e
 #TODO test commands and improve messages
 #TODO clean script
 
-echo "Deploy the file $1 to the environment $2"
+echo "Deploy the file $1 to the environment $2 on port $3"
 
 ### PREPARATION OF PYTHON ENVIRONMENT
 echo "install system packages: python3-virtualenv python3-pip"
@@ -30,7 +30,7 @@ Type=simple
 User=python-user
 Group=python-user
 WorkingDirectory=/opt/app
-ExecStart=/opt/venv/bin/python manage.py run -h 0.0.0.0 
+ExecStart=/opt/venv/bin/python manage.py run -h 0.0.0.0
 Restart=on-failure
 TimeoutStopSec=300
  
