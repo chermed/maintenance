@@ -2,6 +2,8 @@
 set -e
 
 #TODO test commands and improve messages
+#TODO clean script
+
 echo "Deploy the file $1 to the environment $2"
 
 ### PREPARATION OF PYTHON ENVIRONMENT
