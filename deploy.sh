@@ -55,5 +55,6 @@ chown -R python-user:python-user /opt/app
 echo "update requirements as python-user"
 [ -f /opt/app/requirements.txt ] && /bin/su -s /bin/bash -c '/opt/venv/bin/pip install -r /opt/app/requirements.txt' python-user
 echo "restart the application (service client-connectors-$2)"
-systemctl restart client-connectors-$2.service
+systemctl stop client-connectors-$2.service || true
+systemctl start client-connectors-$2.service
 echo "deployement complete without errors"
