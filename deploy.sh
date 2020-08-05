@@ -10,7 +10,7 @@ echo "Deploy the file $1 to the environment $2"
 echo "install system packages: python3-virtualenv python3-pip"
 apt update && apt install -y python3-pip python3-venv
 echo "create the user python-user if not exists"
-id -u python-user &>/dev/null || useradd -s /bin/bash python-user
+useradd -s /bin/bash python-user || echo "User already exists."
 echo "fix permissions on /opt"
 chown -R python-user:python-user /opt/
 echo "create python virtualenv if not exists"
